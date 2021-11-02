@@ -72,12 +72,11 @@
             }
         }
 
-        // สร้างฟังก์ชั่น Scancode
-        async function Scancode(){
+          // สร้างฟังก์ชัน ScanCode
+          async function scanCode(){
             const result = await liff.scanCodeV2()
-            document.getElementById("scanCode").append(result.value) // ดึงข้อมูฃ profile
+            document.getElementById("scanCode").append(result.value)
         }
-
         async function main(){
 
             liff.ready.then(() => {
