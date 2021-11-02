@@ -86,7 +86,14 @@
                     },
                 ])
             }
+            // เปิดไหน้าตามลิ้งค์ที่ได้
+            liff.openWindow({
+                url:result.value,
+                // external:true // เปิดไปที่เว็บนอก
+                external:false // เปิดไนแออฟไลน์
+            })
         }
+
         // ฟังก์ชั่น openWinddow()
         function openWindow(){
             liff.openWindow({
