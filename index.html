@@ -70,15 +70,17 @@
                     }
                 ])
                 alert("Message sent")
-                //ปิดหหน้าจอ
+                //ปิดหหน้าจอ liff
                 liff.closeWindow()
             }
         }
+
 
           // สร้างฟังก์ชัน ScanCode
           async function scanCode(){
             const result = await liff.scanCodeV2()
             document.getElementById("scanCode").append(result.value)
+        
             // ส่ง Code ที่ได้เข้าห้อง Chat
             if (liff.getContext().type !== "none"){
                 await liff.sendMessages([
@@ -88,12 +90,15 @@
                     },
                 ])
             }
-            // เปิดไหน้าตามลิ้งค์ที่ได้
+            
+            // เปิดไปหน้าตามลิ้งค์ที่ได้
             liff.openWindow({
                 url:result.value,
                 // external:true // เปิดไปที่เว็บนอก
                 external:false // เปิดไนแออฟไลน์
             })
+            //ปิดหหน้าจอ
+            liff.closeWindow()
         }
 
         // ฟังก์ชั่น openWinddow()
@@ -104,8 +109,6 @@
                 external:false // เปิดไนแออฟไลน์
             })
         }
-            //ปิดหหน้าจอ
-            liff.closeWindow()
         
         async function main(){
 
