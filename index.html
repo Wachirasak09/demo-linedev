@@ -38,32 +38,34 @@
     }
 
     // ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
-    async function sendMsg(){
-        alert("OKKKKK")
-            // เช็คว่าเปิด LIFF ใน Line App หรือไม่
-            if(liff.getContext().type !== "none"){
+    async function sendMsg() {
+            if (liff.getContext().type !== "none") {
                 await liff.sendMessages([
-                    // ส่ง Sticker
                     {
-                        "type":"sticker",
-                        "stickerId":1,
-                        "packageId":1
+                        "type": "sticker",
+                        "stickerId": 1,
+                        "packageId": 1
+                    },
+                    {
+                        "type":"text",
+                        "text": "This is my message"
+                    },
+                    {
+                        "type": "location",
+                        "title": "my location",
+                        "address": "1-6-1 Yotsuya, Shinjuku-ku, Tokyo, 160-0004, Japan", 
+                        "latitude": 35.687574,
+                        "longitude": 139.72922
+                    },
+                    {
+                        "type": "image",
+                        "originalContentUrl": "https://www.itgenius.co.th/assets/frondend/images/picturecourseshare/Basic_Docker_2021_Share.jpg",
+                        "previewImageUrl": "https://www.itgenius.co.th/assets/frondend/images/picturecourse/Basic_Docker_2021_cover.jpg"
                     }
                 ])
-                alert("Message Send")
+                alert("Message sent")
             }
         }
-        async function main(){
-            
-            liff.ready.then(() => {
-            // ตรวจสอบเงื่อนไขว่า login หรือยัง
-            if (liff.isLoggedIn()) {
-                getUserProfile() // ดึงข้อมูล profile
-                getContext()
-            }else{
-                liff.login()
-            }
-})
 
 await liff.init({ liffId: "1656588631-zw6Or2DE" }) // intial liff id
 }
