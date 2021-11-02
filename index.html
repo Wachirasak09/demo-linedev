@@ -90,11 +90,12 @@
         // ฟังก์ชั่น openWinddow()
         function openWindow(){
             liff.openWindow({
-                url:"https://line.me",
-                external:true // เปิดไปที่เว็บนอก
+                // url:"https://line.me",
+                // external:true // เปิดไปที่เว็บนอก
+                external:false // เปิดไนแออฟไลน์
             })
         }
-        
+
         async function main(){
 
             liff.ready.then(() => {
