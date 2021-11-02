@@ -16,6 +16,7 @@
     <p id="displayName"><b>displayName:</b></p>
     <p id="statusMessage"><b>statusMessage:</b></p>
     <p id="userEmail"><b>UserEmail:</b></p>
+    <p id ="type"> <b> type:</b></p>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
@@ -28,43 +29,46 @@
             document.getElementById("displayName").append(profile.displayName)
             document.getElementById("statusMessage").append(profile.statusMessage)
             document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
+           
         }
 
-// ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
-async function sendMsg(){
+    // สร้างฟังก์ชั่นอ่าน Context
+    function getContext(){
+        document.getElementById("type").append(liff.getContext().type)
+    }
+
+    // ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
+    async function sendMsg(){
+        alert("OKKKKK")
             // เช็คว่าเปิด LIFF ใน Line App หรือไม่
             if(liff.getContext().type !== "none"){
                 await liff.sendMessages([
                     // ส่ง Sticker
                     {
                         "type":"sticker",
-                        "stickerId":1989,
-                        "packageId":446
+                        "stickerId":1,
+                        "packageId":1
                     }
                 ])
                 alert("Message Send")
             }
         }
-
-
-
-
-
-
-
-
-
         async function main(){
-            await liff.init({ liffId: "1656588631-zw6Or2DE" }) // intial liff id
+            
+            liff.ready.then(() => {
             // ตรวจสอบเงื่อนไขว่า login หรือยัง
             if (liff.isLoggedIn()) {
                 getUserProfile() // ดึงข้อมูล profile
+                getContext()
+            }else{
+                liff.login()
             }
-        }
+})
 
-        main()
-
-    </script>
+await liff.init({ liffId: "1656588631-zw6Or2DE" }) // intial liff id
+}
+main()
+</script>
 
 </body>
 </html>
