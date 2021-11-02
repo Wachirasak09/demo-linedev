@@ -16,12 +16,16 @@
     <p id="displayName"><b>displayName:</b></p>
     <p id="statusMessage"><b>statusMessage:</b></p>
     <p id="userEmail"><b>UserEmail:</b></p>
-    <p id ="type"> <b> type:</b></p>
+
+    <p id="type"><b>type:</b> </p>
+
+    <button id="btnMsg" onclick="sendMsg()">Send Message</button>
 
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
     <script>
-    // ฟังก์ชั่นดึงข้อมูล Profile ผู้ใช้
+
+        // ฟังก์ชันดึงข้อมูล Profile ผู้ใช้
         async function getUserProfile(){
             const profile = await liff.getProfile() // ดึงข้อมูล Profile ผู้ใช้
             document.getElementById("pictureUrl").src = profile.pictureUrl
@@ -29,16 +33,15 @@
             document.getElementById("displayName").append(profile.displayName)
             document.getElementById("statusMessage").append(profile.statusMessage)
             document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
-           
         }
 
-    // สร้างฟังก์ชั่นอ่าน Context
-    function getContext(){
-        document.getElementById("type").append(liff.getContext().type)
-    }
+        // สร้างฟังก์ชันอ่าน Context
+        function getContext() {
+            document.getElementById("type").append(liff.getContext().type) 
+        }
 
-    // ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
-    async function sendMsg() {
+        // ฟังก์ชันส่งข้อความเข้าไปในห้องแชต
+        async function sendMsg() {
             if (liff.getContext().type !== "none") {
                 await liff.sendMessages([
                     {
@@ -67,12 +70,27 @@
             }
         }
 
-await liff.init({ liffId: "1656588631-zw6Or2DE" }) // intial liff id
-}
-main()
-</script>
+
+        async function main(){
+
+            liff.ready.then(() => {
+                // ตรวจสอบเงื่อนไขว่า login หรือยัง
+                if (liff.isLoggedIn()) {
+                    getUserProfile() // ดึงข้อมูล profile
+                    getContext()
+                }else{
+                    liff.login()
+                }
+            })
+            await liff.init({ liffId: "1656588631-zw6Or2DE" }) // intial liff id
+            
+        }
+
+        main()
+
+    </script>
 
 </body>
 </html>
 
-  
+
